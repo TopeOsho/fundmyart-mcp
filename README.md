@@ -1,12 +1,25 @@
 # FundMyArt MCP Server
 
-Search **1,999+ verified arts and culture grants** directly from Claude, ChatGPT, Cursor, or any MCP-compatible client.
+Search **~2,000 verified arts and culture grants** directly from Claude, Cursor, or any MCP-compatible client.
 
-FundMyArt is a grants database for artists, arts organisations, universities, and cultural institutions. This server exposes the live catalogue over the [Model Context Protocol](https://modelcontextprotocol.io) so an LLM can answer questions like *"what grants can I apply for as a painter in Scotland?"* with real, up-to-date listings — no hallucinated funders, no stale data.
+FundMyArt maintains a live catalogue of arts and culture funding across UK, EU, US, and international sources. This MCP server plugs that catalogue into your AI assistant so it can answer funding questions with real grants, real deadlines, and real application links — not from training memory, not from the open internet.
 
-- **Catalogue:** ~2,000 grants, refreshed continuously at [fund-my-art.com](https://fund-my-art.com)
-- **Coverage:** UK, EU, US, and international grants across visual arts, film, music, literature, craft, performance, and cross-disciplinary practice
-- **No account or API key required** — the server ships with read-only Supabase credentials
+## What you can do
+
+Once installed, ask your AI assistant questions like:
+
+- *"What production grants are open to a filmmaker in Scotland right now?"*
+- *"I'm an emerging photographer looking for UK bursaries under £5k."*
+- *"Our university runs a residency programme — what grants can fund participant stipends?"*
+- *"Show me heritage craft bursaries with 2026 deadlines."*
+
+You get a ranked list of real grants with:
+
+- Title, funder, and live deadline
+- Eligibility bullets
+- A direct link to the full grant page at fund-my-art.com where you can apply
+
+The catalogue refreshes continuously, so you will not get a grant that closed in February.
 
 ## Install (Claude Desktop)
 
@@ -26,13 +39,19 @@ Add this to your `claude_desktop_config.json`:
 }
 ```
 
-Restart Claude Desktop. The tools `search_grants` and `get_grant_details` will appear.
+Restart Claude Desktop. The tools `search_grants` and `get_grant_details` will appear in the tools menu.
+
+No account or API key required — the server ships with read-only credentials.
 
 ## Install (Cursor / Cline / other MCP clients)
 
 Any client that supports stdio MCP servers can run `npx -y fundmyart-mcp`. Consult your client's MCP configuration docs for the exact JSON shape.
 
-## Tools
+## Coverage
+
+~2,000 verified grants across UK, EU, US, and international sources. Disciplines include visual arts, film, music, literature, craft, performance, and cross-disciplinary practice.
+
+## Tools reference
 
 ### `search_grants`
 
@@ -55,13 +74,6 @@ Fetch a single grant by slug (slugs come from `search_grants` results — do not
 | `slug` | string | Required. Taken verbatim from `search_grants` response. |
 
 Returns: full eligibility, funder, deadline, application URL, description, and canonical FundMyArt URL.
-
-## Example queries
-
-- *"What arts funding is open in the UK right now?"*
-- *"I'm an emerging filmmaker looking for production grants under £10k."*
-- *"Our university runs a residency programme — what grants can fund participant stipends?"*
-- *"Show me heritage craft bursaries with 2026 deadlines."*
 
 ## Privacy & data
 
